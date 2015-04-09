@@ -1,0 +1,5 @@
+options:
+  source:
+    type: string
+    default: "ppa:brad-marshall/thruk"
+    description: "PPA to install thruk"

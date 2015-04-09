@@ -1,0 +1,14 @@
+name: thruk-master
+summary: Thruk web interface for multiple backends of Nagios
+maintainer: Brad Marshall <bradm@serenity>
+description: |
+  Thruk web interface for multiple backends of Nagios
+tags:
+  - ops, monitoring
+subordinate: false
+provides:
+  website:
+    interface: httpd
+requires:
+  thruk-agent:
+    interface: thruk-agent
