@@ -1,5 +1,6 @@
 from charmhelpers.core import hookenv
 import subprocess
+import os
 
 
 def log_start(service_name):
