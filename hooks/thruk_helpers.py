@@ -3,8 +3,6 @@
 from charmhelpers.core import hookenv
 from charmhelpers.core.services import helpers
 
-import hashlib
-
 
 class ThrukMasterRelation(helpers.RelationContext):
     """
@@ -28,10 +26,3 @@ class ThrukMasterRelation(helpers.RelationContext):
         self['thruk_id'] = hookenv.relation_get('thruk_id'),
 
         self['thruk_agent'] = self[self.name]
-        #return {
-        #    'host': hookenv.relation_get('host'),
-        #    'port': hookenv.relation_get('port'),
-        #    'nagios_context': hookenv.relation_get('nagios_context'),
-        #    'thruk_key': hookenv.relation_get('thruk_key'),
-        #    'thruk_id': hookenv.relation_get('thruk_id'),
-        #}

@@ -28,6 +28,7 @@ def manage():
                     source='thruk_local.conf',
                     target='/etc/thruk/thruk_local.conf'),
                 actions.log_start,
+                actions.thruk_set_password,
             ],
         },
     ])
