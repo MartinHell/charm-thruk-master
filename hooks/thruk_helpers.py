@@ -11,7 +11,7 @@ class ThrukMasterRelation(helpers.RelationContext):
 
     name = 'thruk-agent'
     interface = 'thruk-agent'
-    #required_keys = ['host', 'port', 'nagios_context', 'thruk_key', 'thruk_id']
+    # required_keys = ['host', 'port', 'nagios_context', 'thruk_key', 'thruk_id']
 
     def get_data(self):
         """ jinja won't allow hyphens in identifiers, so we switch to
@@ -19,8 +19,7 @@ class ThrukMasterRelation(helpers.RelationContext):
         super(ThrukMasterRelation, self).get_data()
         if not hookenv.relation_ids(self.name):
             return
-        self['host'] = hookenv.relation_get('host'),
-        self['port'] = hookenv.relation_get('port'),
+        self['url'] = hookenv.relation_get('url'),
         self['nagios_context'] = hookenv.relation_get('nagios_context'),
         self['thruk_key'] = hookenv.relation_get('thruk_key'),
         self['thruk_id'] = hookenv.relation_get('thruk_id'),
