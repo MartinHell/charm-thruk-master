@@ -31,13 +31,13 @@ def thruk_set_password(service_name):
 
 def thruk_fix_ssl(service_name):
 
-    if hookenv.config['trusted_ssl_cert']:
+    if hookenv.config('trusted_ssl_cert'):
         cert_file = None
-        if hookenv.config['trusted_ssl_certlocation']:
+        if hookenv.config('trusted_ssl_certlocation'):
             cert_file = '/usr/local/share/ca-certificates/%s' % \
-                (hookenv.config['trusted_ssl_certlocation'].rpartition('/')[2])
+                (hookenv.config('trusted_ssl_certlocation').rpartition('/')[2])
 
-        trusted_ssl_cert = hookenv.config['trusted_ssl_cert']
+        trusted_ssl_cert = hookenv.config('trusted_ssl_cert')
         hookenv.log("Writing cert from trusted_ssl_cert: %s" % trusted_ssl_cert)
         with open(cert_file, 'w') as f:
             f.write(str(base64.b64decode(trusted_ssl_cert)))
