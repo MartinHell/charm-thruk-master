@@ -9,6 +9,9 @@ subordinate: false
 provides:
   website:
     interface: httpd
+  nrpe-external-master:
+    interface: nrpe-external-master
+    scope: container
 requires:
   thruk-agent:
     interface: thruk-agent

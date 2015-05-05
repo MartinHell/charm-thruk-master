@@ -25,3 +25,19 @@ class ThrukMasterRelation(helpers.RelationContext):
         self['thruk_id'] = hookenv.relation_get('thruk_id'),
 
         self['thruk_agent'] = self[self.name]
+
+
+class NEMRelation(helpers.RelationContext):
+    name = 'nrpe-external-master'
+    interface = 'nrpe-external-master'
+    required_keys = ['nagios_hostname']
+
+    def get_data(self):
+        """ jinja won't allow hyphens in identifiers, so we switch to
+        underscores here. """
+
+        super(NEMRelation, self).get_data()
+        if not hookenv.relation_ids(self.name):
+            return
+        self['nrpe_external_master'] = self[self.name]
+
