@@ -22,7 +22,7 @@ except:
 ##
 # Set relationship aliases
 ##
-thruk_unit = d.sentry.unit['nagios/0']
+thruk_unit = d.sentry.unit['thruk-master/0']
 
 thrukpwd = thruk_unit.file_contents('/var/lib/thruk/thrukadmin.passwd').strip()
 
