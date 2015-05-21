@@ -3,12 +3,12 @@
 import amulet
 import requests
 
-seconds = 20000
+seconds = 90000
 
-d = amulet.Deployment(series='trusty')
+d = amulet.Deployment(juju_deployer='juju-deployer -d -v', series='trusty')
 
 d.add('thruk-master')
-d.add('thruk-agent', 'local:trusty/thruk-agent')
+d.add('thruk-agent', charm='/home/bradm/src/juju/trusty/thruk-agent')
 d.add('nagios')
 
 d.relate('nagios:juju-info', 'thruk-agent:general-info')
@@ -17,7 +17,7 @@ d.relate('thruk-master:thruk-agent', 'thruk-agent:thruk-agent')
 d.expose('thruk-master')
 
 try:
-    d.setup(timeout=seconds)
+    d.setup(timeout=seconds, cleanup=False)
     d.sentry.wait()
 except amulet.helpers.TimeoutError:
     amulet.raise_status(amulet.SKIP, msg="Environment wasn't stood up in time")
@@ -32,5 +32,8 @@ thruk_unit = d.sentry.unit['thruk-master/0']
 thrukpwd = thruk_unit.file_contents('/var/lib/thruk/thrukadmin.passwd').strip()
 
 host_url = ("http://%s/thruk/")
-r = requests.get(host_url % thruk_unit.info['public-address'],
-                 auth=('thrukadmin', thrukpwd))
+try:
+    r = requests.get(host_url % thruk_unit.info['public-address'],
+                     auth=('thrukadmin', thrukpwd))
+except:
+    amulet.raise_status(amulet.ERROR, msg="Can't get to thruk URL")
