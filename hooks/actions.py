@@ -15,7 +15,7 @@ def pwgen():
     return str(subprocess.check_output(['pwgen', '-s', '16'])).strip()
 
 
-def update_ppa():
+def update_ppa(service_name):
     config = hookenv.config()
 
     if config.changed('source'):
