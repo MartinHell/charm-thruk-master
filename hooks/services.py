@@ -13,7 +13,7 @@ def manage():
     manager = ServiceManager([
         {
             'service': 'thruk-master',
-            'ports': [80],  # ports to after start
+            'ports': [80, 443],  # ports to after start
             # 'provided_data': [
             #    # context managers for provided relations
             #    # e.g.: helpers.HttpRelation()
