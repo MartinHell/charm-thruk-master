@@ -23,6 +23,7 @@ def manage():
                 # e.g.: helpers.RequiredConfig('domain', 'auth_key'),
                 #       helpers.MysqlRelation(),
                 thruk_helpers.ThrukMasterRelation(),
+                helpers.RequiredConfig(),
             ],
             'data_ready': [
                 helpers.render_template(

@@ -34,6 +34,11 @@ options:
 
       If you're running multiple environments with the same services in them
       this allows you to differentiate between them.
+  log-path:
+    default: "/var/log/thruk/thruk.log"
+    type: string
+    description: >
+      The default log path.
   debug-log:
     default: false
     type: boolean
