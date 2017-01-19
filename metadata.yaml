@@ -1,10 +1,13 @@
 name: thruk-master
 summary: Thruk web interface for multiple backends of Nagios
-maintainer: Brad Marshall <bradm@serenity>
+maintainer: Brad Marshall <brad.marshall@canonical.com>
 description: |
   Thruk web interface for multiple backends of Nagios
 tags:
   - ops, monitoring
+series:
+  - trusty
+  - xenial
 subordinate: false
 provides:
   website:
