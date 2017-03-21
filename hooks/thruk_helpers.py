@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 from charmhelpers.core import hookenv
 from charmhelpers.core.services import helpers
@@ -11,7 +11,6 @@ class ThrukMasterRelation(helpers.RelationContext):
 
     name = 'thruk-agent'
     interface = 'thruk-agent'
-    # required_keys = ['host', 'port', 'nagios_context', 'thruk_key', 'thruk_id']
 
     def get_data(self):
         """ jinja won't allow hyphens in identifiers, so we switch to
@@ -40,4 +39,3 @@ class NEMRelation(helpers.RelationContext):
         if not hookenv.relation_ids(self.name):
             return
         self['nrpe_external_master'] = self[self.name]
-
