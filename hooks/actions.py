@@ -20,8 +20,9 @@ def update_ppa(service_name):
 
     if config.changed('source'):
         prev_ppa = config.previous('source')
-	if prev_ppa is not None:
-            subprocess.check_call(['add-apt-repository', '--yes', '--remove', prev_ppa])
+        if prev_ppa is not None:
+            subprocess.check_call(['add-apt-repository',
+                                   '--yes', '--remove', prev_ppa])
         ppa = config.get('source')
         if ppa is not None:
             add_source(ppa)
@@ -35,10 +36,11 @@ def thruk_set_password(service_name):
         password = pwgen()
         with open(passwd_file, 'w') as pfile:
             pfile.write(password)
-            os.chmod(pfile.name, 0600)
+            os.chmod(pfile.name, 0o600)
 
-        ret = subprocess.call(["/usr/bin/htpasswd", "-b", "/etc/thruk/htpasswd",
-                              "thrukadmin", password])
+        ret = subprocess.call(["/usr/bin/htpasswd",
+                               "-b", "/etc/thruk/htpasswd",
+                               "thrukadmin", password])
         if not ret:
             hookenv.log('WARNING: thruk htpassword reset failed!')
     else:
@@ -55,7 +57,8 @@ def thruk_fix_ssl(service_name):
                 (hookenv.config('trusted_ssl_certlocation').rpartition('/')[2])
 
         trusted_ssl_cert = hookenv.config('trusted_ssl_cert')
-        hookenv.log("Writing cert from trusted_ssl_cert: %s" % trusted_ssl_cert)
+        hookenv.log("Writing cert from trusted_ssl_cert: %s"
+                    % trusted_ssl_cert)
         with open(cert_file, 'w') as f:
             f.write(str(base64.b64decode(trusted_ssl_cert)))
 

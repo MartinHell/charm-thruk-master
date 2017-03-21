@@ -44,7 +44,7 @@ def manage():
                 helpers.render_template(
                     source='thruk-nrpe.j2',
                     target='/etc/nagios/nrpe.d/check_{}.cfg'.format(
-                       hookenv.local_unit().replace('/', '-'),
+                           hookenv.local_unit().replace('/', '-'),
                     )
                 ),
                 helpers.render_template(
