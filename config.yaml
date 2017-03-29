@@ -34,4 +34,25 @@ options:
 
       If you're running multiple environments with the same services in them
       this allows you to differentiate between them.
+  log-path:
+    default: "/var/log/thruk/thruk.log"
+    type: string
+    description: >
+      The default log path.
+  debug-log:
+    default: false
+    type: boolean
+    description: >
+      Enables debug logging for thruk.
+  debug-log-path:
+    default: "/var/log/thruk/debug.log"
+    type: string
+    description: >
+      The default log path for debugging (if enabled).
+  screen-log:
+    default: false
+    type: boolean
+    description: >
+      Enables debug logging to stderr for thruk - in the default case, this ends
+      up in the apache error logs.
 

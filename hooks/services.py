@@ -23,11 +23,15 @@ def manage():
                 # e.g.: helpers.RequiredConfig('domain', 'auth_key'),
                 #       helpers.MysqlRelation(),
                 thruk_helpers.ThrukMasterRelation(),
+                helpers.RequiredConfig(),
             ],
             'data_ready': [
                 helpers.render_template(
                     source='thruk_local.conf',
                     target='/etc/thruk/thruk_local.conf'),
+                helpers.render_template(
+                    source='log4perl.conf',
+                    target='/etc/thruk/log4perl.conf'),
                 actions.log_start,
                 actions.update_ppa,
                 actions.thruk_set_password,
