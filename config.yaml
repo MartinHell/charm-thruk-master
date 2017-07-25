@@ -1,8 +1,22 @@
 options:
   source:
     type: string
-    default: "ppa:brad-marshall/thruk"
-    description: "PPA to install thruk"
+    default: ppa:canonical-bootstack/thruk
+    description: |
+      Optional configuration to support use of additional sources such as:
+
+        - ppa:myteam/ppa
+        - cloud:trusty-proposed/kilo
+        - http://my.archive.com/ubuntu main
+
+      The last option should be used in conjunction with the key configuration
+      option.
+  key:
+    type: string
+    default: 7A207542
+    description: |
+      Key ID to import to the apt keyring to support use with arbitary source
+      configuration from outside of Launchpad archives or PPA's.
   url:
     type: string
     default: "nagios.example.com"
@@ -55,4 +69,8 @@ options:
     description: >
       Enables debug logging to stderr for thruk - in the default case, this ends
       up in the apache error logs.
-
+  enable-lmd:
+    default: true
+    type: boolean
+    description: >
+      If enabled, make use of the LMD - Livestatus Multitool Daemon
