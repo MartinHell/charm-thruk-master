@@ -15,12 +15,10 @@ def install():
     # e.g.: from charmhelpers import fetch
     #       fetch.apt_install(fetch.filter_installed_packages(['nginx']))
     config = hookenv.config()
-    ppa = config.get('source')
-    if ppa is not None:
-        add_source(ppa)
-        apt_update()
-
-    apt_install(["thruk", "pwgen", "apache2-utils"])
+    add_source(config.get('source'), config.get('key', None))
+    apt_update(fatal=True)
+    package_list = ["thruk", "pwgen", "apache2-utils"]
+    apt_install(packages=package_list, fatal=True)
 
 
 if __name__ == "__main__":

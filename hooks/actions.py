@@ -1,6 +1,6 @@
 from charmhelpers.core import hookenv
 from charmhelpers.fetch import (
-    apt_install, apt_update, add_source
+    apt_install, apt_update, add_source, apt_purge
 )
 import subprocess
 import os
@@ -17,17 +17,15 @@ def pwgen():
 
 def update_ppa(service_name):
     config = hookenv.config()
-
-    if config.changed('source'):
-        prev_ppa = config.previous('source')
-        if prev_ppa is not None:
-            subprocess.check_call(['add-apt-repository',
-                                   '--yes', '--remove', prev_ppa])
-        ppa = config.get('source')
-        if ppa is not None:
-            add_source(ppa)
-            apt_update()
-            apt_install(["thruk"])
+    new_source = config.get('source')
+    prev_source = config.previous('source')
+    if prev_source is not None and prev_source != new_source:
+        subprocess.check_call(['add-apt-repository',
+                               '--yes', '--remove', prev_source])
+    add_source(config.get('source'), config.get('key', None))
+    apt_update(fatal=True)
+    package_list = ["thruk", "pwgen", "apache2-utils"]
+    apt_install(packages=package_list, fatal=True)
 
 
 def thruk_set_password(service_name):
